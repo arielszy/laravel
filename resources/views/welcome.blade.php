@@ -19,6 +19,11 @@
                  </ul>
             </div>
         @endif
+        @if (isset($DNI)) 
+         <div class="alert alert-danger">
+            <p>El DNI {{$DNI}} no existe. <a href="">Clic aqui para agregarlo</a></p>
+        </div>
+        @endif
                 <div class='text-center text-white'>
                     <h1 class="text-center mb-3">ingrese el DNI del cliente para comenzar</h1>
                     <form class="form-inline" method='post' target='_self' action="#">
