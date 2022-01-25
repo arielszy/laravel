@@ -22,3 +22,11 @@ Route::get('/', function () {
 Route::post('/', IndexController::class);
 
 Route::resource('user', UserController::class);
+
+Route::get('/resumen', function () {
+    return redirect()->route('/');
+});
+
+Route::post('/resumen', function ($DNI) {
+    return view('resumen',compact('dni'));
+});

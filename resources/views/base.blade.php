@@ -8,7 +8,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Minimarket's friends</title>
     </head>
-    <body>
+    <body class='bg-white'>
+        <!-- Navigation-->
+        <nav class="navbar navbar-light bg-light static-top">
+            <div class="container">
+                <a class="navbar-brand col-md-7" href="#">Minimarket's friends</a>
+                
+            </div>
+        </nav>
     {{-- yield(algun nombre) indica que ese espacio sera reemplazado en otra vista por el contenido que se le envie --}}
     @yield('content')
     @yield('foot')

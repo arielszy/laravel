@@ -4,6 +4,7 @@
 *url llama a un archivo externo. debe estar en la carpeta public
 --}}
 @extends('base') 
+
 @section('content')
 <header class='masthead'>
     <div class='container position-relative'>
@@ -21,7 +22,7 @@
         @endif
         @if (isset($DNI)) 
          <div class="alert alert-danger">
-            <p>El DNI {{$DNI}} no existe. <a href="">Clic aqui para agregarlo</a></p>
+            <span>El DNI {{$DNI}} no existe. <a class="alert-danger" href="{{ route('user.create', ['DNI'=>$DNI]) }}">Clic aqui para agregarlo</a></span>
         </div>
         @endif
                 <div class='text-center text-white'>
@@ -39,6 +40,7 @@
     </div>   
 </header>
 @endsection
+
 @section('custom-css-js')
 <link href=" {{ url('css/styles.css') }}" rel="stylesheet" type="text/css"/>
 @endsection

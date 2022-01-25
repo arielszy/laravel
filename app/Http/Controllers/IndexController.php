@@ -15,7 +15,7 @@ class IndexController extends Controller
         if (!$exist) {
             return view('welcome', compact('DNI'));
         }else {
-            return view('resumen', compact('DNI'));
+            return redirect()->route('user.index', ['DNI' => $DNI]);
         }
     }
 }
