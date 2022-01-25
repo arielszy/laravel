@@ -44,14 +44,14 @@ class UserController extends Controller
         $user->address=$request->input('address'); 
         $user->email=$request->input('email'); 
         $user->DNI=$request->input('DNI'); 
-        $user->DNI=$request->input('phone'); 
+        $user->phone=$request->input('phone'); 
 
         $exist = UserModel::where('email', $user->email)->orWhere('DNI', $user->DNI)->first();//devuelve el primer registro que coincida con el dato enviado, o null si no existe 
        
        if (!$exist) {
         $user->save();//guarda en la db los datos
         $tt='Usuario creado';
-        return view('resumen', compact('user->DNI','tt'));
+        return view('resumen', compact('user','tt'));
        }elseif ($exist['email']==$user->email) {
             $tt='El email '.$exist['email'].' ya existe';
             return view('form', compact('user','tt'));

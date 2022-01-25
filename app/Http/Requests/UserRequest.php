@@ -29,12 +29,13 @@ class UserRequest extends FormRequest
             'address' => 'required|max:30|min:5',
             'DNI' => 'required|max:90000000|min:600000|integer',
             'email' => 'required|email',
-            'phone' => 'required|max:15|min:6|integer',
+            'phone' => 'required|digits_between:7,15|integer',
         ];
     }
     public function messages()
     {
         return [
+            'phone.digits_between' => 'El telefono debe tener entre 7 y 15 caracteres',
             'required' => 'El :attribute es requerido',
             'max' => 'El :attribute es incorrecto',
             'min' => 'El :attribute es incorrecto',

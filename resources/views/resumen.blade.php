@@ -1,1 +1,1 @@
-resumen del cliente {{@$DNI}}
+resumen del cliente {{@$user->DNI}}
