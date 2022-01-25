@@ -16,6 +16,7 @@ class IndexController extends Controller
             return view('welcome', compact('DNI'));
         }else {
             return redirect()->route('user.index', ['DNI' => $DNI]);
+          
         }
     }
 }

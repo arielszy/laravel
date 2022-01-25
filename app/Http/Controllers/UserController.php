@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use App\Http\Requests\UserRequest;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
@@ -50,17 +51,17 @@ class UserController extends Controller
        
        if (!$exist) {
         $user->save();//guarda en la db los datos
-        $tt='Usuario creado';
-        return view('resumen', compact('user','tt'));
+        Session::flash('msg', 'cliente creado');
+        return view('resumen', ['DNI' => $user->DNI]);
        }elseif ($exist['email']==$user->email) {
             $tt='El email '.$exist['email'].' ya existe';
-            return view('form', compact('user','tt'));
+            return view('form');
        }elseif ($exist['DNI']==$user->DNI) {
             $tt='El DNI '.$exist['DNI'].' ya existe';
-            return view('form', compact('user','tt'));
+            return view('form');
        } else {
            $tt='algo paso';
-           return view('form', compact('user','tt'));
+           return view('form');
        }
          
       
