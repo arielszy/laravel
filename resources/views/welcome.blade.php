@@ -10,16 +10,6 @@
     <div class='container position-relative'>
         <div class='row justify-content-center'>
             <div class='col-xl-6'>
-                            <!-- muestra los errores de laravel si hay-->
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                 <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                 </ul>
-            </div>
-        @endif
         @if (isset($DNI)) 
          <div class="alert alert-danger">
             <span>El DNI {{$DNI}} no existe. <a class="alert-danger" href="{{ route('user.create', ['DNI'=>$DNI]) }}">Clic aqui para agregarlo</a></span>

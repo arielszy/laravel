@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Session;
 
 use App\Http\Requests\IndexRequest;
 use App\Models\UserModel;
@@ -15,7 +16,9 @@ class IndexController extends Controller
         if (!$exist) {
             return view('welcome', compact('DNI'));
         }else {
-            return redirect()->route('user.index', ['DNI' => $DNI]);
+            Session::flash('msg', 'Bienvenido '.$exist['name']);
+            session(['user' => $exist]);
+            return redirect()->route('resumen');
           
         }
     }

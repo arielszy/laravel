@@ -38,7 +38,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(UserRequest $request)
-    {
+    {       
+        $exist = UserModel::where('email', $request->input('email'))->orWhere('DNI', $request->input('DNI'))->first();//devuelve el primer registro que coincida con el dato enviado, o null si no existe 
+        if (!$exist) {
         $user=new UserModel(); 
         $user->name=$request->input('name');
         $user->surname=$request->input('surname');
@@ -46,23 +48,20 @@ class UserController extends Controller
         $user->email=$request->input('email'); 
         $user->DNI=$request->input('DNI'); 
         $user->phone=$request->input('phone'); 
-
-        $exist = UserModel::where('email', $user->email)->orWhere('DNI', $user->DNI)->first();//devuelve el primer registro que coincida con el dato enviado, o null si no existe 
-       
-       if (!$exist) {
         $user->save();//guarda en la db los datos
         Session::flash('msg', 'cliente creado');
-        return view('resumen', ['DNI' => $user->DNI]);
-       }elseif ($exist['email']==$user->email) {
-            $tt='El email '.$exist['email'].' ya existe';
-            return view('form');
-       }elseif ($exist['DNI']==$user->DNI) {
-            $tt='El DNI '.$exist['DNI'].' ya existe';
-            return view('form');
-       } else {
-           $tt='algo paso';
-           return view('form');
-       }
+        session(['user' => $user]);
+        return redirect()->route('resumen');
+    }elseif ($exist['email']==$request->input('email')) {
+        Session::flash('msg', 'el email ya existe');
+        return redirect(url('user/create'));
+    }elseif ($exist['DNI']==$request->input('DNI')) {
+        Session::flash('msg', 'el DNI ya existe');
+        return redirect(url('user/create'));
+    } else {
+        Session::flash('msg', 'algo raro paso');
+        return redirect(url('user/create'));
+    }
          
       
         

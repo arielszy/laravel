@@ -8,17 +8,35 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Minimarket's friends</title>
     </head>
-    <body class='bg-white'>
-        <!-- Navigation-->
+    <body class='bg-white'><!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand col-md-7" href="#">Minimarket's friends</a>
-                
+                <a class="navbar-brand col-md-7" href="{{url('/')}}">Minimarket's friends</a>
+                <a href='{{url('user/create')}}' class='btn btn-primary mb-2' >Alta de cliente</a>
+                <a href='#' class='btn btn-primary mb-2' >Configuracion</a>
             </div>
         </nav>
+        <div class="container text-center"><!-- muestra los errores de laravel si hay-->
+        @if ($errors->any())
+        <div class="alert alert-danger">
+         <ul>
+            @foreach ($errors->all() as $error)
+                      <li>{{ $error }}</li>
+            @endforeach
+         </ul>
+        </div>
+        @endif
+        @if (Session::has('msg'))<!-- muestra mensajes de un solo uso enviados por session::flash-->
+        <div class="alert alert-info text-center">
+            {{Session::get('msg')}}
+        </div>
+        @endif 
+        </div>
     {{-- yield(algun nombre) indica que ese espacio sera reemplazado en otra vista por el contenido que se le envie --}}
+    <div class="container">
     @yield('content')
-    @yield('foot')
+   </div>
+   @yield('foot')
     </body>
     {{-- custom css y js --}}
     @yield('custom-css-js')

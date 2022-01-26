@@ -24,7 +24,7 @@ Route::post('/', IndexController::class);
 Route::resource('user', UserController::class);
 
 Route::get('/resumen', function () {
-    return redirect('/');
+    return view('resumen');
 });
 
 Route::post('/resumen', function ($DNI) {
