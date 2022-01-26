@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\UserModel;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -25,8 +26,9 @@ Route::resource('user', UserController::class);
 
 Route::get('/resumen', function () {
     return view('resumen');
-});
-
-Route::post('/resumen', function ($DNI) {
-    return view('resumen',compact('dni'));
 })->name('resumen');
+
+Route::get('/list', function () {
+    $users=UserModel::paginate(9);
+    return view('clientList')->with('users',$users);
+});
