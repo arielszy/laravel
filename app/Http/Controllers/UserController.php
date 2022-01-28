@@ -85,9 +85,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(UserModel $user)
     {
-        //
+        $tt='Editar datos del cliente';
+        return view('form', compact('tt','user'));
     }
 
     /**
@@ -97,9 +98,35 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, UserModel $user)
     {
-        //
+        $user->name=$request->input('name');
+        $user->surname=$request->input('surname');
+        $user->address=$request->input('address'); 
+        $user->phone=$request->input('phone'); 
+        if ($user->email!=$request->input('email'))
+        {
+            $exist = UserModel::where('email', $request->input('email'))->first();//devuelve el primer registro que coincida con el dato enviado, o null si no existe 
+            if (!$exist) {
+                $user->email=$request->input('email');
+                $user->save();//guarda en la db los datos
+                Session::flash('msg', 'cliente editado');
+                session(['user' => $user]);
+                return redirect()->route('resumen');
+            }elseif ($exist['email']==$request->input('email')) {
+                Session::flash('msg', 'el email ya existe');
+                return redirect(route('user.edit' , $user));
+            }
+
+        }else {
+            $user->save();//guarda en la db los datos
+            Session::flash('msg', 'cliente editado');
+            session(['user' => $user]);
+            return redirect()->route('resumen');
+        }
+ 
+         
+      
     }
 
     /**

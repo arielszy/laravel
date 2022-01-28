@@ -3,13 +3,7 @@
 
 @section('content')
 
-
-{{
-$user=session('user');
-
-  
-}}
-  <h1>Resumen del cliente {{@$user['DNI']}} </h1>  
+  <h1>Resumen del cliente {{@$user['name']}} </h1>  
 
 @endsection
 

@@ -17,7 +17,7 @@ class IndexController extends Controller
             return view('welcome', compact('DNI'));
         }else {
             Session::flash('msg', 'Bienvenido '.$exist['name']);
-            session(['user' => $exist]);
+            session::put(['user' => $exist]);
             return redirect()->route('resumen');
           
         }
