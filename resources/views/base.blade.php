@@ -8,8 +8,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Minimarket's friends</title>
     </head>
-    <body class='bg-white'><!-- Navigation-->
-        <nav class="navbar navbar-light bg-light static-top">
+    <body class='bg-dark'><!-- Navigation-->
+        <nav class="navbar navbar-light bg-secondary static-top">
             <div class="container">
                 <a class="navbar-brand col-md-7" href="{{url('/')}}">Minimarket's friends</a>
                 <a href='{{url('user/create')}}' class='btn btn-primary mb-2' >Alta de cliente</a>

@@ -3,7 +3,7 @@
 @section('content')
     
 
-<div class=" text-center mt-5 ">   
+<div class=" text-center mt-5 text-light">   
 <h1>{{@$tt}}</h1>
 </div>
 <div class="row ">

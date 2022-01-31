@@ -1,6 +1,7 @@
 
 @extends('base')
 @section('content')
+<div class="container bg-light table-responsive">
     <table class="table table-striped table-bordered table-hover table-sm text-center">
         <thead>
             <th>id</th>
@@ -39,6 +40,7 @@
             @endforelse
         </tbody>
     </table>
+</div>
     @if ($users->count())
     {{$users->links()}}
     @endif

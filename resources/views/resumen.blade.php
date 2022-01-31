@@ -5,8 +5,8 @@
 @if (isset($user))
     
 
-  <h1>Resumen del cliente {{$user['name']}}. </h1>
-  <h2>Puntos disponibles: {{$user['points']}}; Saldo actual: ${{$user['saldo']}}</h2> 
+  <h1 class="text-light">Resumen del cliente {{$user['name']}}. </h1>
+  <h2 class="text-light">Puntos disponibles: {{$user['points']}}; Saldo actual: ${{$user['saldo']}}</h2> 
   <a href="{{ route('user.edit', $user) }}" class="btn btn-warning btn-sm">Editar cliente</a>
   <a href="{{ route('user.edit', $user) }}" class="btn btn-info btn-sm">Ajustar saldo</a>
   <a href="{{ route('user.edit', $user) }}" class="btn btn-success btn-sm">nueva compra</a>
