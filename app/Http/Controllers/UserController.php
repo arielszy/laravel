@@ -50,7 +50,8 @@ class UserController extends Controller
         $user->phone=$request->input('phone'); 
         $user->save();//guarda en la db los datos
         Session::flash('msg', 'cliente creado');
-        session(['user' => $user]);
+        session::put(['user' => $user]);
+        session::put(['opList' => '']);
         return redirect()->route('resumen');
     }elseif ($exist['email']==$request->input('email')) {
         Session::flash('msg', 'el email ya existe');

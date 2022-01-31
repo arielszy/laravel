@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserModel extends Model
+class OpList extends Model
 {
     use HasFactory;
-    protected $table = 'users';
+    protected $table = 'op_list';
     protected $primaryKey = 'id';
     protected $attributes = [ 
-        'points' => '0',
-        'saldo' => '0' 
+        'Puntos' => '0',
+        'Importe' => '0' 
     ]; 
 }

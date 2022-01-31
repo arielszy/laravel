@@ -1,7 +1,7 @@
 
 @extends('base')
 @section('content')
-    <table class="table text-center">
+    <table class="table table-striped table-bordered table-hover table-sm text-center">
         <thead>
             <th>id</th>
             <th>nombre</th>
@@ -11,6 +11,7 @@
             <th>dni</th>
             <th>telefono</th>
             <th>puntos</th>
+            <th>saldo</th>
             <th>acciones</th>
         </thead>
         <tbody>
@@ -24,6 +25,7 @@
             <td>{{$item->DNI}}</td>
             <td>{{$item->phone}}</td>
             <td>{{$item->points}}</td>
+            <td>{{$item->saldo}}</td>
             <td>
              <a href="{{ route('user.edit', $item) }}" class="btn btn-warning btn-sm">Editar</a>
              <a href="{{ route('user.edit', $item) }}" class="btn btn-info btn-sm">Ajustar saldo</a>

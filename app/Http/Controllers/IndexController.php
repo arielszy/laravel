@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 
 use App\Http\Requests\IndexRequest;
+use App\Models\OpList;
 use App\Models\UserModel;
 
 class IndexController extends Controller
@@ -17,9 +18,10 @@ class IndexController extends Controller
             return view('welcome', compact('DNI'));
         }else {
             Session::flash('msg', 'Bienvenido '.$exist['name']);
+            $opList=OpList::where('Client_id', $exist['id'])->get();
             session::put(['user' => $exist]);
-            return redirect()->route('resumen');
-          
+            session::put(['opList' => $opList]);
+            return redirect(url('/resumen'));
         }
     }
 }

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\UserModel;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\UserController;
+use App\Models\OpList;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,8 @@ Route::resource('user', UserController::class);
 
 Route::get('/resumen', function () {
     $user=Session::get('user');
-    return view('resumen')->with('user',$user);
+    $opList=Session::get('opList');
+    return view('resumen', compact('user','opList'));
 })->name('resumen');
 
 Route::get('/list', function () {
@@ -35,7 +37,9 @@ Route::get('/list', function () {
     return view('clientList')->with('users',$users);
 });
 Route::get('/resumen/{id}', function ($id) {
-    $user=UserModel::where('id', $id)->first();
-    Session::put('user',$user);
+    $user=UserModel::where('id', $id)->first();  
+    Session::put(['user' => $user]);  
+    $opList=OpList::where('Client_id', $id)->get();
+    session::put(['opList' => $opList]);
     return redirect(url('/resumen'));
 })->name('resumenDesdeList');
