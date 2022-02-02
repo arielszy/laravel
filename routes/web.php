@@ -3,7 +3,10 @@ use Illuminate\Support\Facades\Session;
 
 use App\Models\UserModel;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\RegController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\OpList;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +21,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/login', function () {
+    return view('login');
+});
+
 Route::get('/', function () {
-    return view('welcome');
+    $Config=DB::select('select * from Configs');
+    $Config = array_column($Config,'value', 'key');
+    session::put('Config', $Config);
+    return view('welcome',compact('Config'));
 });
 
 Route::post('/', IndexController::class);
@@ -32,7 +42,11 @@ Route::get('/resumen', function () {
     return view('resumen', compact('user','opList'));
 })->name('resumen');
 
-Route::get('/list', function () {
+Route::get('/list/cli', function () {
+    $users=UserModel::paginate(9);
+    return view('clientList')->with('users',$users);
+});
+Route::get('/list/prize', function () {
     $users=UserModel::paginate(9);
     return view('clientList')->with('users',$users);
 });
@@ -43,3 +57,16 @@ Route::get('/resumen/{id}', function ($id) {
     session::put(['opList' => $opList]);
     return redirect(url('/resumen'));
 })->name('resumenDesdeList');
+
+Route::get('/newReg/{op}', function ($op) {
+    $user=Session::get('user');
+    return view('newReg',compact('op','user'));
+});
+Route::get('/newReg', function () {
+    return redirect(url('/newReg/Compra'));
+});
+Route::post('/newReg/Compra', RegController::class);
+Route::post('/newReg/Ajuste', RegController::class);
+Route::get('/config', function () {
+    return view('config');
+});
