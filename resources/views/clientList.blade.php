@@ -29,7 +29,7 @@
             <td>{{$item->saldo}}</td>
             <td>
              <a href="{{ route('user.edit', $item) }}" class="btn btn-warning btn-sm">Editar</a>
-             <a href="{{ route('user.edit', $item) }}" class="btn btn-info btn-sm">Ajustar saldo</a>
+             <a href="{{ url('/newReg/Ajuste') }}" class="btn btn-info btn-sm">Ajustar</a>
              <a href="{{ route('user.edit', $item) }}" class="btn btn-danger btn-sm">Eliminar</a>
             </td>
         </tr>

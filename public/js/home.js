@@ -25,7 +25,7 @@ if (dni) {
 }
 //calcula los puntos ganados segun el importe ingresado
 function calculaPoints(valor) {
-    var point=document.getElementById('point');
-    var price =document.getElementById('price');
-    point.value=Math.round(price.value/valor);
+    var Puntos=document.getElementById('Puntos');
+    var Importe =document.getElementById('Importe');
+    Puntos.value=Math.round(Importe.value/valor);
 }

@@ -11,7 +11,8 @@ class OpList extends Model
     protected $table = 'op_list';
     protected $primaryKey = 'id';
     protected $attributes = [ 
-        'Puntos' => '0',
-        'Importe' => '0' 
+        'Puntos' => 0,
+        'Importe' => 0.00,
+        'Comentarios' => '' 
     ]; 
 }

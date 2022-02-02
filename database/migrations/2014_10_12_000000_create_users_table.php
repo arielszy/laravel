@@ -21,8 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('DNI');
             $table->string('phone');            
-            $table->string('points')->default('0');
-            $table->string('saldo')->default('0');
+            $table->double('points')->default(0);
+            $table->double('saldo')->default(0.00);
             $table->timestamps();
         });
     }

@@ -40,8 +40,8 @@ class UserRequest extends FormRequest
             'max' => 'El :attribute es incorrecto',
             'min' => 'El :attribute es incorrecto',
             'DNI.integer' => 'El DNI debe ser un numero',
-            'DNI.max' => 'El DNI es incorrecto',
-            'DNI.min' => 'El DNI es incorrecto',
+            'DNI.max' => 'Ingrese un DNI valido',
+            'DNI.min' => 'Ingrese un DNI valido',
             'email' => 'El email debe tener un formato correcto',
         ];
     }

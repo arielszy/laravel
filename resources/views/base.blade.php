@@ -1,3 +1,6 @@
+<?php
+    $Config=Session::get('Config');
+?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -6,14 +9,14 @@
         <meta name="description" content="Sistema de puntaje de clientes" />
         <meta name="author" content="Ariel Szyniak" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Minimarket's friends</title>
+        <title>{{$Config['store_name']}}'s friends</title>
     </head>
     <body class='bg-dark'><!-- Navigation-->
         <nav class="navbar navbar-light bg-secondary static-top">
             <div class="container">
-                <a class="navbar-brand col-md-7" href="{{url('/')}}">Minimarket's friends</a>
+                <a class="navbar-brand col-md-7" href="{{url('/')}}">{{$Config['store_name']}}'s friends</a>
                 <a href='{{url('user/create')}}' class='btn btn-primary mb-2' >Alta de cliente</a>
-                <a href='#' class='btn btn-primary mb-2' >Configuracion</a>
+                <a href='{{url('/config')}}' class='btn btn-primary mb-2' >Configuracion</a>
             </div>
         </nav>
         <div class="container text-center"><!-- muestra los errores de laravel si hay-->
@@ -27,8 +30,9 @@
         </div>
         @endif
         @if (Session::has('msg'))<!-- muestra mensajes de un solo uso enviados por session::flash-->
-        <div class="alert alert-info text-center">
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
             {{Session::get('msg')}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif 
         </div>

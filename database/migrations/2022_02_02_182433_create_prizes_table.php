@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOpListsTable extends Migration
+class CreatePrizesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateOpListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('op_list', function (Blueprint $table) {
+        Schema::create('prizes', function (Blueprint $table) {
             $table->id();
-            $table->integer('Client_id');
-            $table->string('Tipo');
-            $table->double('Importe')->default(0.00);
-            $table->float('Puntos')->default(0);
-            $table->string('Comentarios')->default('');
+            $table->string('Descripcion')->default('');
+            $table->integer('Valor')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateOpListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('op_lists');
+        Schema::dropIfExists('prizes');
     }
 }
