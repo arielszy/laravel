@@ -16,7 +16,7 @@ class RegController extends Controller
             $user=$request->session()->get('user');
             $reg=new OpList(); 
             $reg->Client_id=$user->id;
-            $reg->Tipo=$request->input('Tipo').' : '.$request->input('inlineRadioOptions');
+            $reg->Tipo=$request->input('Tipo')=='Compra'?$request->input('Tipo'):$request->input('Tipo').' : '.$request->input('inlineRadioOptions');
             $reg->Importe=$request->input('Importe')??0.00; 
             $reg->Puntos=$request->input('Puntos')??0; 
             $reg->Comentarios=$request->input('Comentarios')??''; 

@@ -1,5 +1,6 @@
 <?php
-    $Config=Session::get('Config');
+    $Config=DB::select('select * from Configs');
+    $Config = array_column($Config,'value', 'key');
 ?>
 <!DOCTYPE html>
 <html lang="es">

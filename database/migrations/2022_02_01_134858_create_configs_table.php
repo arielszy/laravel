@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateConfigsTable extends Migration
 {
@@ -14,9 +15,17 @@ class CreateConfigsTable extends Migration
     public function up()
     {
         Schema::create('configs', function (Blueprint $table) {
-            $table->string('key')->default('');
+            $table->string('key')->default('')->unique();
             $table->string('value')->default('');
         });
+        DB::table('Configs')->insert([
+            'key' => 'store_name',
+            'value' => 'Miinimarket',
+        ]);
+        DB::table('Configs')->insert([
+            'key' => 'points_redeem',
+            'value' => '100',
+        ]);
     }
 
     /**

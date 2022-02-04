@@ -5,9 +5,8 @@ use App\Models\UserModel;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RegController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\DB;
-
 use App\Models\OpList;
+use App\Models\Prize;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,15 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/login', function () {
-    return view('login');
-});
-
 Route::get('/', function () {
-    $Config=DB::select('select * from Configs');
-    $Config = array_column($Config,'value', 'key');
-    session::put('Config', $Config);
-    return view('welcome',compact('Config'));
+    return view('welcome');
 });
 
 Route::post('/', IndexController::class);
@@ -47,8 +39,8 @@ Route::get('/list/cli', function () {
     return view('clientList')->with('users',$users);
 });
 Route::get('/list/prize', function () {
-    $users=UserModel::paginate(9);
-    return view('clientList')->with('users',$users);
+    $prize=Prize::paginate(9);
+    return view('prizeList')->with('prize',$prize);
 });
 Route::get('/resumen/{id}', function ($id) {
     $user=UserModel::where('id', $id)->first();  
@@ -59,12 +51,11 @@ Route::get('/resumen/{id}', function ($id) {
 })->name('resumenDesdeList');
 
 Route::get('/newReg/{op}', function ($op) {
+    $prize=Prize::all();
     $user=Session::get('user');
-    return view('newReg',compact('op','user'));
+    return view('newReg',compact('op','user','prize'));
 });
-Route::get('/newReg', function () {
-    return redirect(url('/newReg/Compra'));
-});
+
 Route::post('/newReg/Compra', RegController::class);
 Route::post('/newReg/Ajuste', RegController::class);
 Route::get('/config', function () {
