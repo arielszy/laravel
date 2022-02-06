@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Session;
 
 use App\Models\UserModel;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\RegController;
 use App\Http\Controllers\UserController;
 use App\Models\OpList;
@@ -51,13 +52,15 @@ Route::get('/resumen/{id}', function ($id) {
 })->name('resumenDesdeList');
 
 Route::get('/newReg/{op}', function ($op) {
-    $prize=Prize::all();
+    $prize=Prize::paginate(9);
     $user=Session::get('user');
     return view('newReg',compact('op','user','prize'));
 });
 
 Route::post('/newReg/Compra', RegController::class);
 Route::post('/newReg/Ajuste', RegController::class);
+Route::post('/newReg/Canje', RegController::class);
+Route::resource('/prize', PrizeController::class);
 Route::get('/config', function () {
     return view('config');
 });

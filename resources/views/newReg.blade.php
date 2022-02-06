@@ -5,18 +5,16 @@
 @extends('base')
 
 @section('content')
-    
-@if (isset($user) && ($op==='Compra') || ($op==='Ajuste'))
-    
-    
 <div class=" text-center mt-5 text-light">   
 <h1>{{@$op}}</h1>
 </div>
-<div class="row ">
-<div class="col-lg-7 mx-auto ">
-    <div class="card mt-2 mx-auto p-4 bg-light">
-        <div class="card-body bg-light">
-            <div class="container">
+
+            @if (isset($user) && ($op==='Compra') || ($op==='Ajuste'))
+            <div class="row ">
+                <div class="col-lg-7 mx-auto ">
+                    <div class="card mt-2 mx-auto p-4 bg-light">
+                        <div class="card-body bg-light">
+                            <div class="container">
                 <form id="contact-form" role="form" method="post" action="#" onsubmit="enable(this);">
                 @csrf
                 <input type="hidden" name="Tipo" value="{{@$op}}">
@@ -57,9 +55,10 @@
     </div> <!-- /.8 -->
 </div> <!-- /.row-->
 </div>
-
 @endif
+
 @if (isset($user)&& ($op==='Canje'))
+<h2 class="text-light">Cliente {{$user['name']}}. Puntos disponibles: {{$user['points']}}</h2> 
 <table class="table table-striped table-bordered table-hover table-sm text-center bg-light">
     <thead>
         <th>id</th>
@@ -73,7 +72,14 @@
         <td>{{$item->id}}</td>
         <td>{{$item->Descripcion}}</td>
         <td>{{$item->Valor}}</td>
-        <a href="" class="btn btn-success btn-sm">Canjear</a>
+        <td>
+            <form id="contact-form" role="form" method="post" action="#">
+                @csrf
+                <input type="hidden" name="Tipo" value="Canje">
+                <input type="hidden" name="Descripcion" value="{{$item->Descripcion}}">
+                <input type="hidden" name="Valor" value="{{$item->Valor}}">
+                <input type="submit" name="btn" class="btn btn-success btn-sm btn-send" onclick="return confirm('Esta seguro que desea canjear?');" value="Canjear"> 
+            </form>
         </td>
     </tr>
         @empty
@@ -88,6 +94,12 @@
 {{$prize->links()}}
 @endif
 @endif
+
+
+
+
+
+
 
 @endsection
 

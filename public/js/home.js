@@ -27,5 +27,5 @@ if (dni) {
 function calculaPoints(valor) {
     var Puntos=document.getElementById('Puntos');
     var Importe =document.getElementById('Importe');
-    Puntos.value=Math.round(Importe.value/valor);
+    Puntos.value=Math.floor(Importe.value/valor);
 }

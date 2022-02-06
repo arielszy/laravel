@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Prize;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PrizeController extends Controller
 {
@@ -14,7 +15,7 @@ class PrizeController extends Controller
      */
     public function index()
     {
-        //
+       return redirect(url('prize/create'));
     }
 
     /**
@@ -24,7 +25,7 @@ class PrizeController extends Controller
      */
     public function create()
     {
-        //
+        return view('prize');
     }
 
     /**
@@ -35,7 +36,12 @@ class PrizeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $prize=new Prize(); 
+        $prize->Descripcion=$request->input('Descripcion');
+        $prize->Valor=$request->input('Puntos');
+        $prize->save();//guarda en la db los datos
+        Session::flash('msg', 'premio creado');
+        return redirect()->route('resumen');
     }
 
     /**

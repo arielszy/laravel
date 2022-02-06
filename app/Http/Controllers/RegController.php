@@ -15,29 +15,40 @@ class RegController extends Controller
     { 
             $user=$request->session()->get('user');
             $reg=new OpList(); 
-            $reg->Client_id=$user->id;
-            $reg->Tipo=$request->input('Tipo')=='Compra'?$request->input('Tipo'):$request->input('Tipo').' : '.$request->input('inlineRadioOptions');
-            $reg->Importe=$request->input('Importe')??0.00; 
             $reg->Puntos=$request->input('Puntos')??0; 
-            $reg->Comentarios=$request->input('Comentarios')??''; 
-            $reg->save();//guarda en la db los datos
+
+
            switch ($request->input('Tipo')) {
             case 'Compra':
+                $reg->Tipo='Compra';
                 $user->points+=(int)$request->input('Puntos');
-                $user->save();//guarda en la db los datos
+                break;   
+            case 'Canje':
+                $reg->Tipo='Canje: '.$request->input('Descripcion');
+                $reg->Puntos=$request->input('Valor');
+                if ($user->points<(int)$request->input('Valor')) {
+                    Session::flash('msg', 'Puntos insufiicientes');  
+                    return redirect()->route('resumen');
+                } else {
+                    $user->points-=(int)$request->input('Valor');
+                }
+                
                 break;   
 
             case 'Ajuste':
                 switch ($request->input('inlineRadioOptions')) {
                     case 'Sumar':
+                        $reg->Tipo='Ajuste: Suma';
                         $user->points+=(int)$request->input('Puntos');
                         $user->saldo+=(double)$request->input('Importe'); 
                      break;
                     case 'Restar':
+                        $reg->Tipo='Ajuste: Resta';
                         $user->points-=(int)$request->input('Puntos');
                         $user->saldo-=(double)$request->input('Importe'); 
                        break;
                     case 'Modificar':
+                        $reg->Tipo='Ajuste: Modificacion';
                         $user->points=(int)$request->input('Puntos');
                         $user->saldo=(double)$request->input('Importe');
                        break;
@@ -45,13 +56,19 @@ class RegController extends Controller
                     default:
                         break;
                 }
-                $user->save();//guarda en la db los datos
+
+
                 break;
             
                default:
                    break;
+     
            }
-
+            $reg->Client_id=$user->id;
+            $reg->Importe=$request->input('Importe')??0.00; 
+            $reg->Comentarios=$request->input('Comentarios')??''; 
+            $user->save();//guarda en la db los datos
+            $reg->save();//guarda en la db los datos
             Session::flash('msg', $request->input('Tipo').' registrado/a');
             $opList=OpList::where('Client_id', $user->id)->get();
             session::put(['opList' => $opList]);
