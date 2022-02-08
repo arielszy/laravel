@@ -18,11 +18,11 @@ class CreateConfigsTable extends Migration
             $table->string('key')->default('')->unique();
             $table->string('value')->default('');
         });
-        DB::table('Configs')->insert([
+        DB::table('configs')->insert([
             'key' => 'store_name',
             'value' => 'Miinimarket',
         ]);
-        DB::table('Configs')->insert([
+        DB::table('configs')->insert([
             'key' => 'points_redeem',
             'value' => '100',
         ]);

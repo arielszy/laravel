@@ -1,5 +1,5 @@
 <?php
-    $Config=DB::select('select * from Configs');
+    $Config=DB::select('select * from configs');
     $Config = array_column($Config,'value', 'key');
 ?>
 @extends('base')

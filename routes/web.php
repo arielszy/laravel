@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\Session;
 
 use App\Models\UserModel;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\RegController;
 use App\Http\Controllers\UserController;
@@ -22,10 +23,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $loged=Session::get('loged');
+
+    if ( $loged) {
+        return view('welcome');
+    }else{
+        return view('login');
+    }
+   
 });
 
 Route::post('/', IndexController::class);
+Route::post('/login', LoginController::class);
 
 Route::resource('user', UserController::class);
 

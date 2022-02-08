@@ -1,5 +1,5 @@
 <?php
-    $Config=DB::select('select * from Configs');
+    $Config=DB::select('select * from configs');
     $Config = array_column($Config,'value', 'key');
 ?>
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
             <div class="container">
                 <a class="navbar-brand col-md-7" href="{{url('/')}}">{{$Config['store_name']}}'s friends</a>
                 <a href='{{url('user/create')}}' class='btn btn-primary mb-2' >Alta de cliente</a>
-                <a href='{{url('/config')}}' class='btn btn-primary mb-2' >Configuracion</a>
+                <a href='#' class='btn btn-primary mb-2' >Configuracion</a>
             </div>
         </nav>
         <div class="container text-center"><!-- muestra los errores de laravel si hay-->
