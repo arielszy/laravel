@@ -20,7 +20,7 @@ class CreateConfigsTable extends Migration
         });
         DB::table('configs')->insert([
             'key' => 'store_name',
-            'value' => 'Miinimarket',
+            'value' => 'Minimarket',
         ]);
         DB::table('configs')->insert([
             'key' => 'points_redeem',

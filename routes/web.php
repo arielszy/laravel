@@ -9,7 +9,6 @@ use App\Http\Controllers\LoginController;
 use App\Models\OpList;
 use App\Models\Prize;
 use Illuminate\Support\Facades\Route;
-use app\Http\Middleware\LogedMiddleware;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
