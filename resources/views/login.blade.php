@@ -33,5 +33,4 @@
 @endsection
 
 @section('custom-css-js')
-<script src="{{asset('js/home.js')}}" type="text/javascript"></script>
 @endsection
