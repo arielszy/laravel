@@ -14,6 +14,7 @@ class LoginController extends Controller
             return redirect(url('/'));      
         }else{
             Session::flash('msg', 'Clave incorrecta');
+            Session::flash('class', 'alert-danger');
             return redirect(url('/login')); 
         }
     }

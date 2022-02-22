@@ -55,12 +55,18 @@ class UserController extends Controller
         return redirect()->route('resumen');
     }elseif ($exist['email']==$request->input('email')) {
         Session::flash('msg', 'el email ya existe');
+        Session::flash('class', 'alert-danger');
+
         return redirect(url('user/create'));
     }elseif ($exist['DNI']==$request->input('DNI')) {
         Session::flash('msg', 'el DNI ya existe');
+        Session::flash('class', 'alert-danger');
+
         return redirect(url('user/create'));
     } else {
         Session::flash('msg', 'algo raro paso');
+        Session::flash('class', 'alert-danger');
+
         return redirect(url('user/create'));
     }
          
@@ -112,16 +118,22 @@ class UserController extends Controller
                 $user->email=$request->input('email');
                 $user->save();//guarda en la db los datos
                 Session::flash('msg', 'cliente editado');
+                Session::flash('class', 'alert-success');
+
                 session(['user' => $user]);
                 return redirect()->route('resumen');
             }elseif ($exist['email']==$request->input('email')) {
                 Session::flash('msg', 'el email ya existe');
+                Session::flash('class', 'alert-danger');
+
                 return redirect(route('user.edit' , $user));
             }
 
         }else {
             $user->save();//guarda en la db los datos
             Session::flash('msg', 'cliente editado');
+            Session::flash('class', 'alert-success');
+
             session(['user' => $user]);
             return redirect()->route('resumen');
         }
@@ -136,8 +148,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UserModel $user)
     {
-        //
+        $user->delete();
+        Session::flash('msg', 'cliente eliminado');
+        Session::flash('class', 'alert-success');
+        return redirect(url('/'));
+
+
     }
 }

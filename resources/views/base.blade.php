@@ -31,7 +31,7 @@
         </div>
         @endif
         @if (Session::has('msg'))<!-- muestra mensajes de un solo uso enviados por session::flash-->
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        <div class="alert {{Session::get('class')}} alert-dismissible fade show" role="alert">
             {{Session::get('msg')}}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>

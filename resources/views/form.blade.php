@@ -42,6 +42,15 @@
        
                     </div>
                 </form>
+                @if (isset($user))
+            </br> 
+                    <form id="contact-form" role="form" method="post" action="{{ route('user.destroy', $user) }}" >
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" name="btn" class="btn btn-danger btn-send" value="Eliminar cliente" onclick="return confirm('Esta seguro que desea eliminar este cliente?')"> 
+                    </form>
+
+                @endif
             </div>
         </div>
     </div> <!-- /.8 -->

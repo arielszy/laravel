@@ -27,7 +27,9 @@ class RegController extends Controller
                 $reg->Tipo='Canje: '.$request->input('Descripcion');
                 $reg->Puntos=$request->input('Valor');
                 if ($user->points<(int)$request->input('Valor')) {
-                    Session::flash('msg', 'Puntos insufiicientes');  
+                    Session::flash('msg', 'Puntos insufiicientes'); 
+                    Session::flash('class', 'alert-danger');
+ 
                     return redirect()->route('resumen');
                 } else {
                     $user->points-=(int)$request->input('Valor');
@@ -70,6 +72,8 @@ class RegController extends Controller
             $user->save();//guarda en la db los datos
             $reg->save();//guarda en la db los datos
             Session::flash('msg', $request->input('Tipo').' registrado/a');
+            Session::flash('class', 'alert-success');
+
             $opList=OpList::where('Client_id', $user->id)->get();
             session::put(['opList' => $opList]);
             return redirect()->route('resumen');

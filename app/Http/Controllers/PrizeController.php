@@ -41,6 +41,8 @@ class PrizeController extends Controller
         $prize->Valor=$request->input('Puntos');
         $prize->save();//guarda en la db los datos
         Session::flash('msg', 'premio creado');
+        Session::flash('class', 'alert-success');
+
         return redirect()->route('resumen');
     }
 
